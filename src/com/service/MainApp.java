@@ -2,6 +2,10 @@ package com.service;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.dao.ReadEmailAddress;
+import com.manager.EmailManager;
+
 import org.apache.log4j.Logger;
 
 public class MainApp {
@@ -11,7 +15,7 @@ public class MainApp {
 	ApplicationContext context = 
             new ClassPathXmlApplicationContext("resources/ApplicationContext.xml");
 
-     SampleClass s1 = (SampleClass) context.getBean("helloWorld");
-     s1.getMessage();
+	ReadEmailAddress s1 = (ReadEmailAddress) context.getBean("readEmail");
+     s1.saveEmail(1,"lakshmirajyam.k@gmail.com");
 	}
 }

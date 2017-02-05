@@ -3,9 +3,11 @@ package com.service;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 import com.dao.ReadEmailAddress;
 import com.manager.EmailManager;
 
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 
 public class MainApp {
@@ -15,7 +17,10 @@ public class MainApp {
 	ApplicationContext context = 
             new ClassPathXmlApplicationContext("resources/ApplicationContext.xml");
 
+	/*PropertiesConfiguration s1 = (PropertiesConfiguration) context.getBean("simpleConfig");
+     System.out.print(s1.getString("application.name"));*/
 	ReadEmailAddress s1 = (ReadEmailAddress) context.getBean("readEmail");
-     s1.saveEmail(1,"lakshmirajyam.k@gmail.com");
+	s1.saveEmail(2, "Test@gmail.com");
+	
 	}
 }

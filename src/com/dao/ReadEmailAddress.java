@@ -1,5 +1,7 @@
 package com.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+@Repository("readEmail")
 public class ReadEmailAddress {
 	private JdbcTemplate jdbcTemplate; 
 	

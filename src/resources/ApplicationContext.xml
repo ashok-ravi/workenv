@@ -2,18 +2,63 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"  
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <context:annotation-config />
+    
+    <context:component-scan base-package="com" />
 
-   <bean id="helloWorld" class="com.service.SampleClass">
+    <bean id="simpleConfig" class="org.apache.commons.configuration.PropertiesConfiguration"
+		init-method="load">
+		<constructor-arg value="resources/application.properties"></constructor-arg>
+	</bean>
+    <!-- <bean id="calc" class="com.service.Calculator">
+        <constructor-arg index="0">
+          <list>
+    		<value>Hyundai</value>
+    		<value>Honda</value>
+    		<value>Toyota</value>
+    		<value>Lexus</value>
+    	  </list>
+        </constructor-arg>
+        	
+        <constructor-arg index="1">
+            <set>
+    		<value>Hyundai</value>
+    		<value>Honda</value>
+    		<value>Toyota</value>
+    	    </set>
+        </constructor-arg>
+        <constructor-arg index="2"><map></map></constructor-arg>
+    	<property name="carList">
+    	<list>
+    		<value>Hyundai</value>
+    		<value>Honda</value>
+    		<value>Toyota</value>
+    	</list>
+    	</property>
+    	<property name="carSet">
+    	     <set>
+    		<value>Hyundai</value>
+    		<value>Honda</value>
+    		<value>Toyota</value>
+    	    </set>
+    	</property>
+    </bean> -->
+    <!-- 
+   <bean id="helloWorld" class="com.service.SampleClass" init-method="init" destroy-method="destroy">
        <property name="message" value="Hello World!"/>
-   </bean>
+        <property name="calc" ref="calc"> </property> 
+   </bean> -->
+   
+   
 
    <bean id="emailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	<property name="host" value="in-v3.mailjet.com" />
-	<property name="port" value="587" />
-	<property name="username" value="34e3e759ce34045720e43cea3d08f3b0" />
-	<property name="password" value="48421182d5fd9fc3e1f7f8fe43cf4bc6" />
+
 
 	<property name="javaMailProperties">
 	   <props>
@@ -27,18 +72,18 @@
        <property name="mailSender" ref="emailSender" />
    </bean>
    
-   <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />  
-<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />  
-<property name="username" value="DATA_ENGINE" />  
-<property name="password" value="Abcd1234" />  
-</bean>  
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />  
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />  
+		<property name="username" value="DATA_ENGINE" />  
+		<property name="password" value="Abcd1234" />  
+	</bean>  
   
-<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
-<property name="dataSource" ref="ds"></property>  
-</bean>  
- <bean id="readEmail" class="com.dao.ReadEmailAddress">  
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+		<property name="dataSource" ref="dataSource"></property>  
+	</bean>  
+ 	<bean id="readEmail" class="com.dao.ReadEmailAddress">  
  		<constructor-arg ref="jdbcTemplate" />
-</bean> 
+	</bean> 
    
 </beans>
